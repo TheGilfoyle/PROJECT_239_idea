@@ -2,6 +2,7 @@ package app;
 
 import io.github.humbleui.jwm.*;
 
+import java.io.File;
 import java.util.function.Consumer;
 
 /**
@@ -20,9 +21,20 @@ public class Application implements Consumer<Event> {
         // создаём окно
         window = App.makeWindow();
         // задаём обработчиком событий текущий объект
+        window.setTitle("Java 2D");
         window.setEventListener(this);
+        // задаём размер окна
+        window.setWindowSize(900, 900);
+        // задаём его положение
+        window.setWindowPosition(100, 100);
+        // задаём иконку
+        switch (Platform.CURRENT) {
+            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
+            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
+        }
         // делаем окно видимым
         window.setVisible(true);
+
     }
 
     /**
@@ -41,3 +53,4 @@ public class Application implements Consumer<Event> {
         }
     }
 }
+
