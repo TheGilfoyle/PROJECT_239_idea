@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/misc/Misc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,9 @@
       <updated>1669281624950</updated>
       <workItem from="1669281626586" duration="2697000" />
       <workItem from="1669627573147" duration="1598000" />
-      <workItem from="1669886055418" duration="2969000" />
+      <workItem from="1669886055418" duration="3152000" />
+      <workItem from="1670229413150" duration="758000" />
+      <workItem from="1670490220167" duration="623000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -131,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669888396706</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add setColor()">
+      <created>1669889137215</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669889137215</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +164,7 @@
     <MESSAGE value="window title ready" />
     <MESSAGE value="window icon ready" />
     <MESSAGE value="canvas works" />
-    <option name="LAST_COMMIT_MESSAGE" value="canvas works" />
+    <MESSAGE value="add setColor()" />
+    <option name="LAST_COMMIT_MESSAGE" value="add setColor()" />
   </component>
 </project>
