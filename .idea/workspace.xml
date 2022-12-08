@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/misc/Vector2i.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
       <workItem from="1669627573147" duration="1598000" />
       <workItem from="1669886055418" duration="3152000" />
       <workItem from="1670229413150" duration="758000" />
-      <workItem from="1670490220167" duration="623000" />
+      <workItem from="1670490220167" duration="1088000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -139,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669889137215</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="drawign rect works">
+      <created>1670490859217</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1670490859217</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +171,7 @@
     <MESSAGE value="window icon ready" />
     <MESSAGE value="canvas works" />
     <MESSAGE value="add setColor()" />
-    <option name="LAST_COMMIT_MESSAGE" value="add setColor()" />
+    <MESSAGE value="drawign rect works" />
+    <option name="LAST_COMMIT_MESSAGE" value="drawign rect works" />
   </component>
 </project>
