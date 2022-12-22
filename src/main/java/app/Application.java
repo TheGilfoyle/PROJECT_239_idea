@@ -23,6 +23,14 @@ public class Application implements Consumer<Event> {
     /**
      * Первый заголовок
      */
+    private final Label label2;
+    /**
+     * Первый заголовок
+     */
+    private final Label label3;
+    /**
+     * Первый заголовок
+     */
     private final Label label;
     /**
      * отступы панелей
@@ -46,7 +54,7 @@ public static final int C_RAD_IN_PX = 4;
 
         // создаём первый заголовок
         label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                "Привет, мир!", true, true);
+                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
         // задаём обработчиком событий текущий объект
         window.setEventListener(this);
         window.setTitle("Java 2D");
@@ -75,6 +83,13 @@ public static final int C_RAD_IN_PX = 4;
                 System.out.println("Ошибка создания слоя " + className);
             }
         }
+        // создаём второй заголовок
+        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
+
+        // создаём третий заголовок
+        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
 
         if (window._layer == null)
             throw new RuntimeException("Нет доступных слоёв для создания");
@@ -114,7 +129,12 @@ public static final int C_RAD_IN_PX = 4;
         // восстанавливаем состояние канваса
         canvas.restore();
         // рисуем заголовок в точке [100,100] с шириной и выостой 200
-        label.paint(canvas, new CoordinateSystem2i(100, 100, 200, 200));
+        label.paint(canvas,windowCS);
+
+        // рисуем второй заголовок
+        label2.paint(canvas, windowCS);
+        // рисуем третий заголовок
+        label3.paint(canvas, windowCS);
     }
 }
 

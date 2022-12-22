@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/panels/GridPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controls/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Label.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +70,7 @@
       <workItem from="1670229413150" duration="758000" />
       <workItem from="1670490220167" duration="2305000" />
       <workItem from="1671438113612" duration="642000" />
-      <workItem from="1671696710110" duration="2131000" />
+      <workItem from="1671696710110" duration="2435000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -175,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671698519356</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="text centering works">
+      <created>1671698976804</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671698976805</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +215,7 @@
     <MESSAGE value="int cs" />
     <MESSAGE value="panel created" />
     <MESSAGE value="render text" />
-    <option name="LAST_COMMIT_MESSAGE" value="render text" />
+    <MESSAGE value="text centering works" />
+    <option name="LAST_COMMIT_MESSAGE" value="text centering works" />
   </component>
 </project>
