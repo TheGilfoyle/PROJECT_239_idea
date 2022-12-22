@@ -40,11 +40,13 @@ public static final int C_RAD_IN_PX = 4;
     /**
      * Конструктор окна приложения
      */
-
     public Application() {
-
         // создаём окно
         window = App.makeWindow();
+
+        // создаём первый заголовок
+        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                "Привет, мир!", true, true);
         // задаём обработчиком событий текущий объект
         window.setEventListener(this);
         window.setTitle("Java 2D");
@@ -74,8 +76,6 @@ public static final int C_RAD_IN_PX = 4;
             }
         }
 
-        // создаём первый заголовок
-        label = new Label(window, false, PANEL_BACKGROUND_COLOR, PANEL_PADDING, "Привет, мир!");
         if (window._layer == null)
             throw new RuntimeException("Нет доступных слоёв для создания");
         // делаем окно видимым

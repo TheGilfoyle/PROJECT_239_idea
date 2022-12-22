@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Fonts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controls/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Label.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
       <workItem from="1670229413150" duration="758000" />
       <workItem from="1670490220167" duration="2305000" />
       <workItem from="1671438113612" duration="642000" />
-      <workItem from="1671696710110" duration="1795000" />
+      <workItem from="1671696710110" duration="2131000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -171,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671697310557</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="render text">
+      <created>1671698519356</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671698519356</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +205,7 @@
     <MESSAGE value="int vector" />
     <MESSAGE value="int cs" />
     <MESSAGE value="panel created" />
-    <option name="LAST_COMMIT_MESSAGE" value="panel created" />
+    <MESSAGE value="render text" />
+    <option name="LAST_COMMIT_MESSAGE" value="render text" />
   </component>
 </project>
