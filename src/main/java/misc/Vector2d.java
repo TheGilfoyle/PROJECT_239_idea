@@ -164,5 +164,4 @@ public class Vector2d {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
-
 }

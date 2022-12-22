@@ -35,7 +35,7 @@ public class Vector2i {
      * @param e событие
      */
     public Vector2i(Event e) {
-        // если событие кнопка мыши
+// если событие кнопка мыши
         if (e instanceof EventMouseMove ee) {
             this.x = ee.getX();
             this.y = ee.getY();
@@ -73,7 +73,6 @@ public class Vector2i {
     public static Vector2i subtract(Vector2i a, Vector2i b) {
         return new Vector2i(a.x - b.x, a.y - b.y);
     }
-
 
     /**
      * Получить случайное значение в заданном диапазоне [min,max)
@@ -126,33 +125,17 @@ public class Vector2i {
                 ')';
     }
 
-    /**
-     * Проверка двух объектов на равенство
-     *
-     * @param o объект, с которым сравниваем текущий
-     * @return флаг, равны ли два объекта
-     */
     @Override
     public boolean equals(Object o) {
-        // если объект сравнивается сам с собой, тогда объекты равны
         if (this == o) return true;
-        // если в аргументе передан null или классы не совпадают, тогда объекты не равны
         if (o == null || getClass() != o.getClass()) return false;
 
-        // приводим переданный в параметрах объект к текущему классу
         Vector2i vector2i = (Vector2i) o;
 
-        // если не совпадают x координаты
         if (x != vector2i.x) return false;
-        // объекты совпадают тогда и только тогда, когда совпадают их координаты
         return y == vector2i.y;
     }
 
-    /**
-     * Получить хэш-код объекта
-     *
-     * @return хэш-код объекта
-     */
     @Override
     public int hashCode() {
         int result = x;
