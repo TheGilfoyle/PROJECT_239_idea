@@ -1,22 +1,20 @@
 package misc;
 
-import io.github.humbleui.jwm.Event;
-import io.github.humbleui.jwm.EventMouseMove;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Класс двумерного вектора int
+ * Класс двумерного вектора double
  */
-public class Vector2i {
+public class Vector2d {
     /**
      * x - координата вектора
      */
-    public int x;
+    public double x;
     /**
      * y - координата вектора
      */
-    public int y;
+    public double y;
 
     /**
      * Конструктор вектора
@@ -24,22 +22,17 @@ public class Vector2i {
      * @param x координата X вектора
      * @param y координата Y вектора
      */
-    public Vector2i(int x, int y) {
+    public Vector2d(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * Конструктор вектора от события
-     *
-     * @param e событие
+     * Конструктор вектора создаёт нулевой вектор
      */
-    public Vector2i(Event e) {
-        // если событие кнопка мыши
-        if (e instanceof EventMouseMove ee) {
-            this.x = ee.getX();
-            this.y = ee.getY();
-        }
+    public Vector2d() {
+        this.x = 0;
+        this.y = 0;
     }
 
     /**
@@ -49,16 +42,18 @@ public class Vector2i {
      * @param b второй вектор
      * @return сумма двух векторов
      */
-    public static Vector2i sum(Vector2i a, Vector2i b) {
-        return new Vector2i(a.x + b.x, a.y + b.y);
+
+    public static Vector2d sum(Vector2d a, Vector2d b) {
+        return new Vector2d(a.x + b.x, a.y + b.y);
     }
+
 
     /**
      * Добавить вектор к текущему вектору
      *
      * @param v вектор, который нужно добавить
      */
-    public void add(Vector2i v) {
+    public void add(Vector2d v) {
         this.x = this.x + v.x;
         this.y = this.y + v.y;
     }
@@ -70,10 +65,31 @@ public class Vector2i {
      * @param b второй вектор
      * @return разность двух векторов
      */
-    public static Vector2i subtract(Vector2i a, Vector2i b) {
-        return new Vector2i(a.x - b.x, a.y - b.y);
+    public static Vector2d subtract(Vector2d a, Vector2d b) {
+        return new Vector2d(a.x - b.x, a.y - b.y);
     }
 
+    /**
+     * Вычесть вектор из текущего
+     *
+     * @param v вектор, который нужно вычесть
+     */
+    public void subtract(Vector2d v) {
+        this.x = this.x - v.x;
+        this.y = this.y - v.y;
+    }
+
+    /**
+     * Умножение вектора на число
+     *
+     * @param v вектор
+     * @param a число
+     * @return результат умножения вектора на число
+     */
+
+    public static Vector2d mul(Vector2d v, double a) {
+        return new Vector2d(v.x * a, v.y * a);
+    }
 
     /**
      * Получить случайное значение в заданном диапазоне [min,max)
@@ -82,27 +98,12 @@ public class Vector2i {
      * @param max верхняя граница
      * @return случайное значение в заданном диапазоне [min,max)
      */
-    public static Vector2i rand(Vector2i min, Vector2i max) {
-        return new Vector2i(
-                ThreadLocalRandom.current().nextInt(min.x, max.x),
-                ThreadLocalRandom.current().nextInt(min.y, max.y)
+
+    public static Vector2d rand(Vector2d min, Vector2d max) {
+        return new Vector2d(
+                ThreadLocalRandom.current().nextDouble(min.x, max.x),
+                ThreadLocalRandom.current().nextDouble(min.y, max.y)
         );
-    }
-
-    /**
-     * Увеличить каждую из координат на 1
-     */
-    public void inc() {
-        this.x++;
-        this.y++;
-    }
-
-    /**
-     * уменьшить каждую из координат на 1
-     */
-    public void dec() {
-        this.x--;
-        this.y--;
     }
 
     /**
@@ -121,8 +122,8 @@ public class Vector2i {
      */
     @Override
     public String toString() {
-        return "(" + x +
-                ", " + y +
+        return "(" + String.format("%.2f", x).replace(",", ".") +
+                ", " + String.format("%.2f", y).replace(",", ".") +
                 ')';
     }
 
@@ -140,12 +141,12 @@ public class Vector2i {
         if (o == null || getClass() != o.getClass()) return false;
 
         // приводим переданный в параметрах объект к текущему классу
-        Vector2i vector2i = (Vector2i) o;
+        Vector2d vector2d = (Vector2d) o;
 
         // если не совпадают x координаты
-        if (x != vector2i.x) return false;
+        if (Double.compare(vector2d.x, x) != 0) return false;
         // объекты совпадают тогда и только тогда, когда совпадают их координаты
-        return y == vector2i.y;
+        return Double.compare(vector2d.y, y) == 0;
     }
 
     /**
@@ -155,8 +156,13 @@ public class Vector2i {
      */
     @Override
     public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(x);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
 }
