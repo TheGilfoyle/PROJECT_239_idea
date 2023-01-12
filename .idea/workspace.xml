@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="">
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="adding points works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/Panel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelLog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +70,7 @@
       <workItem from="1670490220167" duration="2305000" />
       <workItem from="1671438113612" duration="642000" />
       <workItem from="1671696710110" duration="5364000" />
-      <workItem from="1673515675942" duration="1518000" />
+      <workItem from="1673515675942" duration="2171000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -215,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671701120301</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="adding points works">
+      <created>1673517219388</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1673517219389</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +255,7 @@
     <MESSAGE value="4 panels" />
     <MESSAGE value="add task classes" />
     <MESSAGE value="float cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="float cs" />
+    <MESSAGE value="adding points works" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding points works" />
   </component>
 </project>
