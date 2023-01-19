@@ -12,6 +12,29 @@ import static app.Fonts.FONT18;
  */
 public class Input extends GridPanel {
     /**
+     * Возвращает флаг, установлен ли фокус на это поле ввода
+     *
+     * @return флаг
+     */
+    public boolean isFocused() {
+        return focused;
+    }
+    /**
+     * Установить фокус на это поле ввода
+     */
+    public void setFocus() {
+        // снимаем фокус со всех полей ввода
+        InputFactory.defocusAll();
+        // выделяем текущее поле ввода
+        this.focused = true;
+    }
+    /**
+     * флаг, помещён ли сейчас фокус на это поле ввода
+     * (модификатор доступа по умолчанию, чтобы был доступен
+     * фабрике InputFactory внутри пакета)
+     */
+    boolean focused = false;
+    /**
      * Размер поля ввода
      */
     private static final int INPUT_SIZE = 40;
@@ -93,6 +116,13 @@ public class Input extends GridPanel {
                 paint.setColor(textColor);
                 // рисуем линию текста
                 canvas.drawTextLine(line, 0, 0, paint);
+                // если время рисовать курсор
+                if (focused && InputFactory.cursorDraw()) {
+                    // смещаем область рисования
+                    canvas.translate(line.getWidth(), 0);
+                    // рисуем его
+                    canvas.drawRect(Rect.makeXYWH(0, metrics.getAscent(), 2, metrics.getHeight()), paint);
+                }
             }
             // восстанавливаем область рисования
             canvas.restore();
@@ -219,50 +249,5 @@ public class Input extends GridPanel {
      */
     public String getText() {
         return text;
-    }
-    /**
-     * Метод под рисование в конкретной реализации
-     *
-     * @param canvas   область рисования
-     * @param windowCS СК окна
-     */
-    @Override
-    public void paintImpl(Canvas canvas, CoordinateSystem2i windowCS) {
-        // создаём кисть
-        try (var paint = new Paint()) {
-            // сохраняем область рисования
-            canvas.save();
-            // задаём цвет рисования
-            paint.setColor(backgroundColor);
-            // создаём метрику фона
-            FontMetrics metrics = FONT18.getMetrics();
-            // если нужно выровнять по высоте
-            if (vcentered) {
-                canvas.translate(0, (windowCS.getSize().y - INPUT_SIZE) / 2.0f);
-            }
-            // рисуем скруглённый квадрат
-            canvas.drawRRect(RRect.makeXYWH(0, 0, windowCS.getSize().x, INPUT_SIZE, 4), paint);
-            // начальное положение
-            float y = INPUT_SIZE - LOCAL_PADDING - metrics.getDescent();
-            // создаём строку для рисования
-            try (TextLine line = TextLine.make(text, FONT18)) {
-                // смещаем область рисования
-                canvas.translate(LOCAL_PADDING, y);
-                // задаём цвет текста
-                paint.setColor(textColor);
-                // рисуем линию текста
-                canvas.drawTextLine(line, 0, 0, paint);
-                // если время рисовать курсор
-                if (InputFactory.cursorDraw()) {
-                    // смещаем область рисования
-                    canvas.translate(line.getWidth(), 0);
-                    // рисуем его
-                    canvas.drawRect(Rect.makeXYWH(0, metrics.getAscent(), 2, metrics.getHeight()), paint);
-                }
-            }
-            // восстанавливаем область рисования
-            canvas.restore();
-
-        }
     }
 }
