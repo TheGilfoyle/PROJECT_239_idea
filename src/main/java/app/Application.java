@@ -204,6 +204,7 @@ public static final int C_RAD_IN_PX = 4;
                             return;
 
                         }
+                        case TAB -> InputFactory.nextTab();
                     }
             }
         }
