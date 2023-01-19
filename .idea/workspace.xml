@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="inputs work">
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="input select works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controls/InputFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/InputFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
       <workItem from="1671696710110" duration="5364000" />
       <workItem from="1673515675942" duration="2476000" />
       <workItem from="1673855863300" duration="1642000" />
-      <workItem from="1674118987715" duration="1857000" />
+      <workItem from="1674118987715" duration="2626000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -249,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674120356008</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="input select works">
+      <created>1674120865811</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1674120865811</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +294,7 @@
     <MESSAGE value="adding points works" />
     <MESSAGE value="log works" />
     <MESSAGE value="inputs work" />
-    <option name="LAST_COMMIT_MESSAGE" value="inputs work" />
+    <MESSAGE value="input select works" />
+    <option name="LAST_COMMIT_MESSAGE" value="input select works" />
   </component>
 </project>

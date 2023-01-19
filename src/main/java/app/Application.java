@@ -1,5 +1,6 @@
 package app;
 
+import controls.InputFactory;
 import controls.Label;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
@@ -173,6 +174,14 @@ public static final int C_RAD_IN_PX = 4;
                 if (eventKey.isModifierDown(MODIFIER))
                     // разбираем, какую именно кнопку нажали
                     switch (eventKey.getKey()) {
+                        case ESCAPE -> {
+                            window.close();
+                            // завершаем обработку, иначе уже разрушенный контекст
+                            // будет передан панелям
+                            return;
+
+                        }
+                        case TAB -> InputFactory.nextTab();
                         case W -> window.close();
                         case H -> window.minimize();
                         case S -> PanelRendering.save();
