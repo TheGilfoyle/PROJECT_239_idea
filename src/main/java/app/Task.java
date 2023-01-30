@@ -1,9 +1,13 @@
 package app;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.humbleui.jwm.MouseButton;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.Rect;
+import lombok.Getter;
 import misc.CoordinateSystem2d;
 import misc.CoordinateSystem2i;
 import misc.Vector2d;
@@ -13,9 +17,11 @@ import panels.PanelLog;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 /**
  * Класс задачи
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 public class Task {
 
     /**
@@ -46,6 +52,7 @@ public class Task {
                 addPoint(pos, Point.PointSet.SECOND_SET);
         }
     }
+
     /**
      * Очистить задачу
      */
@@ -59,12 +66,14 @@ public class Task {
     public void solve() {
         PanelLog.warning("Вызван метод solve()\n Пока что решения нет");
     }
+
     /**
      * Отмена решения задачи
      */
     public void cancel() {
 
     }
+
     /**
      * Добавить точку
      *
@@ -77,6 +86,7 @@ public class Task {
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " добавлена в " + newPoint.getSetName());
     }
+
     /**
      * Текст задачи
      */
@@ -89,10 +99,12 @@ public class Task {
     /**
      * Вещественная система координат задачи
      */
+    @Getter
     private final CoordinateSystem2d ownCS;
     /**
      * Список точек
      */
+    @Getter
     private final ArrayList<Point> points;
     /**
      * Размер точки
@@ -103,13 +115,18 @@ public class Task {
      * последняя СК окна
      */
     protected CoordinateSystem2i lastWindowCS;
+
     /**
      * Задача
      *
      * @param ownCS  СК задачи
      * @param points массив точек
      */
-    public Task(CoordinateSystem2d ownCS, ArrayList<Point> points) {
+    @JsonCreator
+    public Task(
+            @JsonProperty("ownCS") CoordinateSystem2d ownCS,
+            @JsonProperty("points") ArrayList<Point> points
+    ) {
         this.ownCS = ownCS;
         this.points = points;
     }
@@ -139,6 +156,7 @@ public class Task {
         }
         canvas.restore();
     }
+
     /**
      * Клик мыши по пространству задачи
      *
