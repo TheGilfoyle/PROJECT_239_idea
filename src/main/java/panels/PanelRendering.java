@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Панель рисования
  */
 public class PanelRendering extends GridPanel {
+
     /**
      * Сохранить файл
      */
