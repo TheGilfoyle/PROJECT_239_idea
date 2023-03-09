@@ -11,6 +11,10 @@ public class Colors {
      */
     public static final int BUTTON_COLOR = Misc.getColor(80, 0, 0, 0);
     /**
+     * Цвет сетки
+     */
+    public static final int TASK_GRID_COLOR = Misc.getColor(64, 255, 255, 255);
+    /**
      * Цвет подложки поля ввода
      */
     public static final int FIELD_BACKGROUND_COLOR = Misc.getColor(255, 255, 255, 255);
