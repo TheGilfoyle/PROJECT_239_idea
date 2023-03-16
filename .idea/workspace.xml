@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="mouse cursor">
-      <change afterPath="$PROJECT_DIR$/src/main/java/misc/SumQueue.java" afterDir="false" />
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="render statistic">
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +118,7 @@
       <workItem from="1674118987715" duration="3676000" />
       <workItem from="1675060554357" duration="5221000" />
       <workItem from="1678353189436" duration="2528000" />
-      <workItem from="1678958280896" duration="308000" />
+      <workItem from="1678958280896" duration="611000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -351,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678958464924</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="render statistic">
+      <created>1678958796219</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1678958796219</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +376,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="canvas works" />
     <MESSAGE value="add setColor()" />
     <MESSAGE value="drawign rect works" />
     <MESSAGE value="int vector" />
@@ -394,6 +400,7 @@
     <MESSAGE value="cs rendering" />
     <MESSAGE value="scale works" />
     <MESSAGE value="mouse cursor" />
-    <option name="LAST_COMMIT_MESSAGE" value="mouse cursor" />
+    <MESSAGE value="render statistic" />
+    <option name="LAST_COMMIT_MESSAGE" value="render statistic" />
   </component>
 </project>
