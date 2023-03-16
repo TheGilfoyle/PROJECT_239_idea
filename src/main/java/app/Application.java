@@ -3,6 +3,7 @@ package app;
 import controls.InputFactory;
 import controls.Label;
 import dialogs.PanelInfo;
+import dialogs.PanelSelectFile;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
 import io.github.humbleui.skija.Canvas;
@@ -57,6 +58,10 @@ public class Application implements Consumer<Event> {
      * Первый заголовок
      */
     private final Label label3;
+    /**
+     * Панель выбора файла
+     */
+    private final PanelSelectFile panelSelectFile;
     /**
      * Первый заголовок
      */
@@ -144,6 +149,8 @@ public static final int C_RAD_IN_PX = 4;
         window.setWindowSize(900, 900);
         // задаём его положение
         window.setWindowPosition(100, 100);
+        // Панель выбора файла
+        panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
         // задаём иконку
         switch (Platform.CURRENT) {
             case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
@@ -242,7 +249,7 @@ public static final int C_RAD_IN_PX = 4;
         }
         switch (currentMode) {
             case INFO -> panelInfo.accept(e);
-            case FILE -> {}
+            case FILE -> panelSelectFile.accept(e);
             case WORK -> {
                 // передаём события на обработку панелям
                 panelControl.accept(e);
@@ -268,9 +275,10 @@ public static final int C_RAD_IN_PX = 4;
         panelLog.paint(canvas, windowCS);
         panelHelp.paint(canvas, windowCS);
         // рисуем диалоги
+        // рисуем диалоги
         switch (currentMode) {
             case INFO -> panelInfo.paint(canvas, windowCS);
-            case FILE -> {}
+            case FILE -> panelSelectFile.paint(canvas, windowCS);
         }
         canvas.restore();
     }
