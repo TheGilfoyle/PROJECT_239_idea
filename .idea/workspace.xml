@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="scale works">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="mouse cursor">
+      <change afterPath="$PROJECT_DIR$/src/main/java/misc/SumQueue.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +118,7 @@
       <workItem from="1674118987715" duration="3676000" />
       <workItem from="1675060554357" duration="5221000" />
       <workItem from="1678353189436" duration="2528000" />
+      <workItem from="1678958280896" duration="308000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -344,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678355567105</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="mouse cursor">
+      <created>1678958464924</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1678958464924</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,7 +369,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="window icon ready" />
     <MESSAGE value="canvas works" />
     <MESSAGE value="add setColor()" />
     <MESSAGE value="drawign rect works" />
@@ -387,6 +393,7 @@
     <MESSAGE value="unit tests" />
     <MESSAGE value="cs rendering" />
     <MESSAGE value="scale works" />
-    <option name="LAST_COMMIT_MESSAGE" value="scale works" />
+    <MESSAGE value="mouse cursor" />
+    <option name="LAST_COMMIT_MESSAGE" value="mouse cursor" />
   </component>
 </project>

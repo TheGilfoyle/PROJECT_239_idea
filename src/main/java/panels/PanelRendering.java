@@ -10,6 +10,7 @@ import io.github.humbleui.jwm.Window;
 import io.github.humbleui.skija.Canvas;
 import misc.CoordinateSystem2d;
 import misc.CoordinateSystem2i;
+import misc.Stats;
 import misc.Vector2d;
 
 import java.io.File;
@@ -66,7 +67,10 @@ public class PanelRendering extends GridPanel {
      * Представление проблемы
      */
     public static Task task;
-
+    /**
+     * Статистика fps
+     */
+    private final Stats fpsStats;
     /**
      * Панель управления
      *
@@ -91,6 +95,7 @@ public class PanelRendering extends GridPanel {
         CoordinateSystem2d cs = new CoordinateSystem2d(
                 new Vector2d(-10.0, -10.0), new Vector2d(10.0, 10.0)
         );
+        fpsStats = new Stats();
 // создаём задачу без точек
         task = new Task(cs, new ArrayList<>());
         // добавляем в нё 10 случайных
@@ -105,7 +110,11 @@ public class PanelRendering extends GridPanel {
      */
     @Override
     public void paintImpl(Canvas canvas, CoordinateSystem2i windowCS) {
+        // рисуем задачу
         task.paint(canvas, windowCS);
+        // рисуем статистику фпс
+        fpsStats.paint(canvas, windowCS, FONT12, padding);
+        // рисуем перекрестие, если мышь внутри области рисования этой панели
         if (lastInside && lastMove != null)
             task.paintMouse(canvas, windowCS, FONT12, lastWindowCS.getRelativePos(lastMove));
     }

@@ -7,6 +7,18 @@ import misc.Misc;
  */
 public class Colors {
     /**
+     * Цвет подложки
+     */
+    public static final int STATS_BACKGROUND_COLOR = Misc.getColor(64, 51, 200, 51);
+    /**
+     * Цвет подложки
+     */
+    public static final int STATS_COLOR = Misc.getColor(255, 51, 200, 51);
+    /**
+     * Цвет текста
+     */
+    public static final int STATS_TEXT_COLOR = Misc.getColor(255, 255, 255, 255);
+    /**
      * Цвет кнопки
      */
     public static final int BUTTON_COLOR = Misc.getColor(80, 0, 0, 0);
