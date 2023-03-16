@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="render statistic">
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="help panel">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dialogs/PanelInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +41,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2HzIjGIAgmbiOES5GHzPGHTnaEy" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -118,7 +123,7 @@
       <workItem from="1674118987715" duration="3676000" />
       <workItem from="1675060554357" duration="5221000" />
       <workItem from="1678353189436" duration="2528000" />
-      <workItem from="1678958280896" duration="611000" />
+      <workItem from="1678958280896" duration="1305000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>
@@ -358,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678958796219</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="help panel">
+      <created>1678958975928</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1678958975928</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +388,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add setColor()" />
     <MESSAGE value="drawign rect works" />
     <MESSAGE value="int vector" />
     <MESSAGE value="int cs" />
@@ -401,6 +412,7 @@
     <MESSAGE value="scale works" />
     <MESSAGE value="mouse cursor" />
     <MESSAGE value="render statistic" />
-    <option name="LAST_COMMIT_MESSAGE" value="render statistic" />
+    <MESSAGE value="help panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="help panel" />
   </component>
 </project>
