@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="info panel">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dialogs/PanelSelectFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/panels/PanelList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Primitive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/panels/PanelPrimitives.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/misc/Vector2i.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/Vector2i.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +128,8 @@
       <workItem from="1675060554357" duration="5221000" />
       <workItem from="1678353189436" duration="2528000" />
       <workItem from="1678958280896" duration="2251000" />
+      <workItem from="1680508722073" duration="5770000" />
+      <workItem from="1681113619452" duration="4989000" />
     </task>
     <task id="LOCAL-00001" summary="skija connected">
       <created>1669282493107</created>

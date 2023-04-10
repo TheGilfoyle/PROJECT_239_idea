@@ -12,10 +12,7 @@ import io.github.humbleui.skija.RRect;
 import io.github.humbleui.skija.Surface;
 import misc.CoordinateSystem2i;
 import misc.Misc;
-import panels.PanelControl;
-import panels.PanelHelp;
-import panels.PanelLog;
-import panels.PanelRendering;
+import panels.*;
 
 import java.io.File;
 import java.util.function.Consumer;
@@ -74,6 +71,10 @@ public class Application implements Consumer<Event> {
      * отступы панелей
      */
     public static final int PANEL_PADDING = 5;
+/*    *//**
+     * Панель информации
+     *//*
+    private final PanelPrimitives panelPrimitives;*/
     /**
      * Текущий режим(по умолчанию рабочий)
      */
@@ -110,6 +111,9 @@ public static final int C_RAD_IN_PX = 4;
     public Application() {
         // создаём окно
         window = App.makeWindow();
+
+        /*// панель игры
+        panelPrimitives = new PanelPrimitives(window, false, APP_BACKGROUND_COLOR, PANEL_PADDING);*/
 
         // создаём первый заголовок
         label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
@@ -246,6 +250,9 @@ public static final int C_RAD_IN_PX = 4;
                         case TAB -> InputFactory.nextTab();
                     }
             }
+            /*// запускаем обработку событий у панели примитивов
+            panelPrimitives.accept(e);*/
+
         }
         switch (currentMode) {
             case INFO -> panelInfo.accept(e);
@@ -273,6 +280,7 @@ public static final int C_RAD_IN_PX = 4;
         panelRendering.paint(canvas, windowCS);
         panelControl.paint(canvas, windowCS);
         panelLog.paint(canvas, windowCS);
+        /*panelPrimitives.paint(canvas, windowCS);*/
         panelHelp.paint(canvas, windowCS);
         // рисуем диалоги
         // рисуем диалоги
