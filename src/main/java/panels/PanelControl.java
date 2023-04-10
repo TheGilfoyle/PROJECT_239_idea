@@ -199,6 +199,7 @@ public class PanelControl extends GridPanel {
         load.setOnClick(() -> {
             PanelRendering.load();
             cancelTask();
+
         });
         buttons.add(load);
 
