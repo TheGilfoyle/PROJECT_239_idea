@@ -8,11 +8,7 @@ import misc.Vector2d;
 
 import java.util.Objects;
 
-/**
- * Класс точки
- */
-public class Point {
-
+public class Line {
     /**
      * Координаты точки
      */
@@ -24,7 +20,7 @@ public class Point {
      * @param pos     положение точки
      */
     @JsonCreator
-    public Point(@JsonProperty("pos") Vector2d pos) {
+    public Line(@JsonProperty("pos") Vector2d pos) {
         this.pos = pos;
     }
 
@@ -35,7 +31,7 @@ public class Point {
      */
     @JsonIgnore
     public int getColor() {
-        return Misc.getColor(0xCC, 0x00, 0x00, 0xFF);
+       return Misc.getColor(0xCC, 0x00, 0x00, 0xFF);
     }
 
     /**
@@ -77,8 +73,8 @@ public class Point {
         // если в аргументе передан null или классы не совпадают, тогда объекты не равны
         if (o == null || getClass() != o.getClass()) return false;
         // приводим переданный в параметрах объект к текущему классу
-        Point point = (Point) o;
-        return Objects.equals(pos, point.pos);
+        Line line = (Line) o;
+        return Objects.equals(pos, line.pos);
     }
 
     /**

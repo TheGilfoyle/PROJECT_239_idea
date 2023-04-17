@@ -12,6 +12,7 @@ import io.github.humbleui.skija.RRect;
 import io.github.humbleui.skija.Surface;
 import misc.CoordinateSystem2i;
 import misc.Misc;
+import misc.Vector2i;
 import panels.*;
 
 import java.io.File;
@@ -23,6 +24,106 @@ import static app.Colors.*;
  * Класс окна приложения
  */
 public class Application implements Consumer<Event> {
+    /**
+     * цвет фона
+     */
+    public static final int APP_BACKGROUND_COLOR = Misc.getColor(255, 38, 70, 83);
+    /**
+     * окно приложения
+     */
+    private final Window window;
+    /**
+     * отступ приложения
+     */
+    public static final int PANEL_PADDING = 5;
+    /**
+     * радиус скругления элементов
+     */
+    public static final int C_RAD_IN_PX = 4;
+    /**
+     * Панель информации
+     */
+    private final PanelPrimitives panelPrimitives;
+    /**
+     * Конструктор окна приложения
+     */
+    public Application() {
+        // создаём окно
+        window = App.makeWindow();
+        // создаём панель рисования
+        panelRendering = new PanelRendering(
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 0,
+                3, 2
+        );
+        // создаём панель управления
+        panelControl = new PanelControl(
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 0,
+                2, 2
+        );
+        // создаём панель лога
+        panelLog = new PanelLog(
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 2,
+                3, 1
+        );
+        // создаём панель помощи
+        panelHelp = new PanelHelp(
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 2,
+                2, 1
+        );
+
+        // панель игры
+        panelPrimitives = new PanelPrimitives(window, false, APP_BACKGROUND_COLOR, PANEL_PADDING);
+               // задаём обработчиком событий текущий объект
+        window.setEventListener(this);
+        window.setTitle("Java 2D");
+        // задаём размер окна
+        window.setWindowSize(900, 900);
+        // задаём его положение
+        window.setWindowPosition(100, 100);
+        // Панель выбора файла
+        // создаём первый заголовок
+        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
+
+        // создаём второй заголовок
+        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
+
+        // создаём третий заголовок
+        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
+
+
+        panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
+        // задаём иконку
+        switch (Platform.CURRENT) {
+            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
+            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
+        }
+        // названия слоёв, которые будем перебирать
+        String[] layerNames = new String[]{
+                "LayerGLSkija", "LayerRasterSkija"
+        };
+
+        // перебираем слои
+        for (String layerName : layerNames) {
+            String className = "io.github.humbleui.jwm.skija." + layerName;
+            try {
+                Layer layer = (Layer) Class.forName(className).getDeclaredConstructor().newInstance();
+                window.setLayer(layer);
+                break;
+            } catch (Exception e) {
+                System.out.println("Ошибка создания слоя " + className);
+            }
+        }
+        if (window._layer == null)
+            throw new RuntimeException("Нет доступных слоёв для создания");
+        // делаем окно видимым
+        window.setVisible(true);
+        // панель информации
+        panelInfo = new PanelInfo(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
+    }
+
     /**
      * флаг того, что окно развёрнуто на весь экран
      */
@@ -68,25 +169,10 @@ public class Application implements Consumer<Event> {
      */
     private final PanelInfo panelInfo;
     /**
-     * отступы панелей
-     */
-    public static final int PANEL_PADDING = 5;
-/*    *//**
-     * Панель информации
-     *//*
-    private final PanelPrimitives panelPrimitives;*/
-    /**
      * Текущий режим(по умолчанию рабочий)
      */
     public static Mode currentMode = Mode.WORK;
-    /**
- * радиус скругления элементов
- */
-public static final int C_RAD_IN_PX = 4;
-    /**
-     * окно приложения
-     */
-    private final Window window;
+
     /**
      * Режимы работы приложения
      */
@@ -105,84 +191,6 @@ public static final int C_RAD_IN_PX = 4;
         FILE
     }
 
-    /**
-     * Конструктор окна приложения
-     */
-    public Application() {
-        // создаём окно
-        window = App.makeWindow();
-
-        /*// панель игры
-        panelPrimitives = new PanelPrimitives(window, false, APP_BACKGROUND_COLOR, PANEL_PADDING);*/
-
-        // создаём первый заголовок
-        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
-        // создаём панель рисования
-        panelRendering = new PanelRendering(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 0,
-                3, 2
-        );
-        // создаём панель управления
-        panelControl = new PanelControl(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 0,
-                2, 2
-        );
-        // создаём панель лога
-        panelLog = new PanelLog(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 2,
-                3, 1
-        );
-        // создаём панель помощи
-        panelHelp = new PanelHelp(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 2,
-                2, 1
-        );
-        // создаём второй заголовок
-        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
-
-        // создаём третий заголовок
-        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
-
-        // задаём обработчиком событий текущий объект
-        window.setEventListener(this);
-        window.setTitle("Java 2D");
-        // задаём размер окна
-        window.setWindowSize(900, 900);
-        // задаём его положение
-        window.setWindowPosition(100, 100);
-        // Панель выбора файла
-        panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
-        // задаём иконку
-        switch (Platform.CURRENT) {
-            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
-            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
-        }
-        // названия слоёв, которые будем перебирать
-        String[] layerNames = new String[]{
-                "LayerGLSkija", "LayerRasterSkija"
-        };
-
-        // перебираем слои
-        for (String layerName : layerNames) {
-            String className = "io.github.humbleui.jwm.skija." + layerName;
-            try {
-                Layer layer = (Layer) Class.forName(className).getDeclaredConstructor().newInstance();
-                window.setLayer(layer);
-                break;
-            } catch (Exception e) {
-                System.out.println("Ошибка создания слоя " + className);
-            }
-        }
-        if (window._layer == null)
-            throw new RuntimeException("Нет доступных слоёв для создания");
-        // делаем окно видимым
-        window.setVisible(true);
-        // панель информации
-        panelInfo = new PanelInfo(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
-    }
 
     /**
      * Обработчик событий
@@ -250,8 +258,8 @@ public static final int C_RAD_IN_PX = 4;
                         case TAB -> InputFactory.nextTab();
                     }
             }
-            /*// запускаем обработку событий у панели примитивов
-            panelPrimitives.accept(e);*/
+            // запускаем обработку событий у панели примитивов
+            panelPrimitives.accept(e);
 
         }
         switch (currentMode) {
@@ -277,10 +285,11 @@ public static final int C_RAD_IN_PX = 4;
         // очищаем канвас
         canvas.clear(APP_BACKGROUND_COLOR);
         // рисуем панели
+        panelPrimitives.paint(canvas, windowCS);
+        // рисуем панели
         panelRendering.paint(canvas, windowCS);
         panelControl.paint(canvas, windowCS);
         panelLog.paint(canvas, windowCS);
-        /*panelPrimitives.paint(canvas, windowCS);*/
         panelHelp.paint(canvas, windowCS);
         // рисуем диалоги
         // рисуем диалоги

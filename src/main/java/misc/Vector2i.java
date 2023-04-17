@@ -1,10 +1,10 @@
 package misc;
 
+import app.Primitive;
 import io.github.humbleui.jwm.Event;
 import io.github.humbleui.jwm.EventMouseMove;
 
 import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * Класс двумерного вектора int
  */
@@ -112,6 +112,7 @@ public class Vector2i {
     public double length() {
         return Math.sqrt(x * x + y * y);
     }
+
     /**
      * Умножение вектора на число
      *
@@ -151,4 +152,5 @@ public class Vector2i {
         result = 31 * result + y;
         return result;
     }
+
 }

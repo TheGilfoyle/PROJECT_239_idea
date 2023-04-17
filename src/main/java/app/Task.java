@@ -54,9 +54,9 @@ public class Task {
             Vector2d pos = ownCS.getCoords(gridPos, addGrid);
             // сработает примерно в половине случаев
             if (ThreadLocalRandom.current().nextBoolean())
-                addPoint(pos, Point.PointSet.FIRST_SET);
+                addPoint(pos);
             else
-                addPoint(pos, Point.PointSet.SECOND_SET);
+                addPoint(pos);
         }
     }
     /**
@@ -97,6 +97,7 @@ public class Task {
             canvas.restore();
         }
     }
+
     /**
      * Очистить задачу
      */
@@ -119,7 +120,7 @@ public class Task {
                 Point a = points.get(i);
                 Point b = points.get(j);
                 // если точки совпадают по положению
-                if (a.pos.equals(b.pos) && !a.pointSet.equals(b.pointSet)) {
+                if (a.pos.equals(b.pos)) {
                     if (!crossed.contains(a)){
                         crossed.add(a);
                         crossed.add(b);
@@ -180,14 +181,13 @@ public class Task {
      * Добавить точку
      *
      * @param pos      положение
-     * @param pointSet множество
      */
-    public void addPoint(Vector2d pos, Point.PointSet pointSet) {
+    public void addPoint(Vector2d pos) {
         solved = false;
-        Point newPoint = new Point(pos, pointSet);
+        Point newPoint = new Point(pos);
         points.add(newPoint);
         // Добавляем в лог запись информации
-        PanelLog.info("точка " + newPoint + " добавлена в " + newPoint.getSetName());
+        PanelLog.info("точка " + newPoint + " добавлена");
     }
     /**
      * Список точек в пересечении
@@ -330,6 +330,7 @@ public class Task {
         // восстанавливаем область рисования
         canvas.restore();
     }
+
     /**
      * Клик мыши по пространству задачи
      *
@@ -342,10 +343,10 @@ public class Task {
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
         // если левая кнопка мыши, добавляем в первое множество
         if (mouseButton.equals(MouseButton.PRIMARY)) {
-            addPoint(taskPos, Point.PointSet.FIRST_SET);
+            addPoint(taskPos);
             // если правая, то во второе
         } else if (mouseButton.equals(MouseButton.SECONDARY)) {
-            addPoint(taskPos, Point.PointSet.SECOND_SET);
+            addPoint(taskPos);
         }
     }
 }
