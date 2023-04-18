@@ -260,7 +260,7 @@ public class Task {
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
         myRect = new MyRect(new Point(new Vector2d(-1,-1)), new Point(new Vector2d(0,0)));
-        line = new Line(new Point(new Vector2d(-1,1)), new Point(new Vector2d(0, 0)),this);
+        line = new Line(new Vector2d(-1, 1), new Vector2d(0, 0), this);
     }
 
     /**
@@ -272,7 +272,7 @@ public class Task {
     private void renderTask(Canvas canvas, CoordinateSystem2i windowCS) {
         canvas.save();
         myRect.paint(windowCS,ownCS,canvas);
-        line.paint(windowCS,ownCS,canvas);
+        line.renderLine(canvas,windowCS);
         // создаём перо
         try (var paint = new Paint()) {
 
