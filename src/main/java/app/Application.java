@@ -41,10 +41,6 @@ public class Application implements Consumer<Event> {
      */
     public static final int C_RAD_IN_PX = 4;
     /**
-     * Панель информации
-     */
-    private final PanelPrimitives panelPrimitives;
-    /**
      * Конструктор окна приложения
      */
     public Application() {
@@ -71,9 +67,7 @@ public class Application implements Consumer<Event> {
                 2, 1
         );
 
-        // панель игры
-        panelPrimitives = new PanelPrimitives(window, false, APP_BACKGROUND_COLOR, PANEL_PADDING);
-               // задаём обработчиком событий текущий объект
+        // задаём обработчиком событий текущий объект
         window.setEventListener(this);
         window.setTitle("Java 2D");
         // задаём размер окна
@@ -82,17 +76,6 @@ public class Application implements Consumer<Event> {
         window.setWindowPosition(100, 100);
         // Панель выбора файла
         // создаём первый заголовок
-        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
-
-        // создаём второй заголовок
-        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
-
-        // создаём третий заголовок
-        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
-
 
         panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
         // задаём иконку
@@ -149,21 +132,9 @@ public class Application implements Consumer<Event> {
      */
     private final PanelLog panelLog;
     /**
-     * Первый заголовок
-     */
-    private final Label label2;
-    /**
-     * Первый заголовок
-     */
-    private final Label label3;
-    /**
      * Панель выбора файла
      */
     private final PanelSelectFile panelSelectFile;
-    /**
-     * Первый заголовок
-     */
-    private final Label label;
     /**
      * Панель информации
      */
@@ -258,9 +229,6 @@ public class Application implements Consumer<Event> {
                         case TAB -> InputFactory.nextTab();
                     }
             }
-            // запускаем обработку событий у панели примитивов
-            panelPrimitives.accept(e);
-
         }
         switch (currentMode) {
             case INFO -> panelInfo.accept(e);
@@ -284,8 +252,6 @@ public class Application implements Consumer<Event> {
         canvas.save();
         // очищаем канвас
         canvas.clear(APP_BACKGROUND_COLOR);
-        // рисуем панели
-        panelPrimitives.paint(canvas, windowCS);
         // рисуем панели
         panelRendering.paint(canvas, windowCS);
         panelControl.paint(canvas, windowCS);

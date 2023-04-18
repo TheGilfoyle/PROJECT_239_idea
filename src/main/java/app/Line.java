@@ -1,89 +1,58 @@
 package app;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import misc.Misc;
-import misc.Vector2d;
-
-import java.util.Objects;
+import io.github.humbleui.skija.Canvas;
+import io.github.humbleui.skija.Paint;
+import io.github.humbleui.skija.RRect;
+import io.github.humbleui.skija.Rect;
+import misc.*;
 
 public class Line {
-    /**
-     * Координаты точки
-     */
-    public final Vector2d pos;
+    Point a;
+    Point b;
 
-    /**
-     * Конструктор точки
-     *
-     * @param pos     положение точки
-     */
-    @JsonCreator
-    public Line(@JsonProperty("pos") Vector2d pos) {
-        this.pos = pos;
-    }
+    Task task;
 
-    /**
-     * Получить цвет точки по её множеству
-     *
-     * @return цвет точки
-     */
-    @JsonIgnore
-    public int getColor() {
-       return Misc.getColor(0xCC, 0x00, 0x00, 0xFF);
-    }
-
-    /**
-     * Получить положение
-     * (нужен для json)
-     *
-     * @return положение
-     */
-    public Vector2d getPos() {
-        return pos;
+    public Line(Point a, Point b, Task task) {
+        this.a = a;
+        this.b = b;
+        this.task = task;
     }
 
 
 
 
-
-    /**
-     * Строковое представление объекта
-     *
-     * @return строковое представление объекта
-     */
-    @Override
-    public String toString() {
-        return "Point{" +
-                ", pos=" + pos +
-                '}';
+    void renderLine(Canvas canvas, CoordinateSystem2i windowCS) {
+// опорные точки линии
+        Vector2i pointA = windowCS.getCoords(a.pos, task.getOwnCS());
+        Vector2i pointB = windowCS.getCoords(b.pos, task.getOwnCS());
+// вектор, ведущий из точки A в точку B
+        Vector2i delta = Vector2i.subtract(pointA, pointB);
+// получаем максимальную длину отрезка на экране, как длину диагонали экрана
+        int maxDistance = (int) windowCS.getSize().length();
+// получаем новые точки для рисования, которые гарантируют, что линия
+// будет нарисована до границ экрана
+        Vector2i renderPointA = Vector2i.sum(pointA, Vector2i.mult(delta, maxDistance));
+        Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
+// рисуем линию
+        try (Paint p = new Paint()) {
+            p.setColor(Misc.getColor(100, 200, 100, 50));
+            canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, p);
+        }
+        //try (Paint p = new Paint()) {
+          //  p.setColor(Misc.getColor(200, 200, 100, 50));
+            //canvas.drawRect(Rect.makeXYWH(pointA.x - 3, pointA.y - 3, 6, 6), p);
+            //canvas.drawRect(Rect.makeXYWH(pointB.x - 3, pointB.y - 3, 6, 6), p);
+        //}
     }
-
-    /**
-     * Проверка двух объектов на равенство
-     *
-     * @param o объект, с которым сравниваем текущий
-     * @return флаг, равны ли два объекта
-     */
-    @Override
-    public boolean equals(Object o) {
-        // если объект сравнивается сам с собой, тогда объекты равны
-        if (this == o) return true;
-        // если в аргументе передан null или классы не совпадают, тогда объекты не равны
-        if (o == null || getClass() != o.getClass()) return false;
-        // приводим переданный в параметрах объект к текущему классу
-        Line line = (Line) o;
-        return Objects.equals(pos, line.pos);
-    }
-
-    /**
-     * Получить хэш-код объекта
-     *
-     * @return хэш-код объекта
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(pos);
+    void paint(CoordinateSystem2i windowCS, CoordinateSystem2d taskCS, Canvas canvas){
+        // создаём перо
+        try (var p = new Paint()) {
+            // левая верхняя вершина
+            Vector2i pointA = windowCS.getCoords(a.pos,taskCS);
+            // правая нижняя
+            Vector2i pointC = windowCS.getCoords(b.pos,taskCS);
+            // рисуем его стороны
+            canvas.drawLine(pointA.x, pointA.y, pointC.x, pointC.y, p);
+        }
     }
 }

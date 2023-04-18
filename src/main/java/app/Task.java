@@ -225,6 +225,16 @@ public class Task {
     @Getter
     private final ArrayList<Point> points;
     /**
+     * Список прямоугольников
+     */
+    @Getter
+    private final MyRect myRect;
+    /**
+     * Список прямых
+     */
+    @Getter
+    private final Line line;
+    /**
      * Размер точки
      */
     private static final int POINT_SIZE = 3;
@@ -249,6 +259,8 @@ public class Task {
         this.points = points;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
+        myRect = new MyRect(new Point(new Vector2d(-1,-1)), new Point(new Vector2d(0,0)));
+        line = new Line(new Point(new Vector2d(-1,1)), new Point(new Vector2d(0, 0)),this);
     }
 
     /**
@@ -259,8 +271,11 @@ public class Task {
      */
     private void renderTask(Canvas canvas, CoordinateSystem2i windowCS) {
         canvas.save();
+        myRect.paint(windowCS,ownCS,canvas);
+        line.paint(windowCS,ownCS,canvas);
         // создаём перо
         try (var paint = new Paint()) {
+
             for (Point p : points) {
                 if (!solved) {
                     paint.setColor(p.getColor());
