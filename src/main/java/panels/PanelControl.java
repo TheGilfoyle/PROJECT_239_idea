@@ -157,7 +157,7 @@ public class PanelControl extends GridPanel {
         buttons.add(addPoint);
         Button addRectangle = new Button(
                 window, false, backgroundColor, 0,
-                6, gw, 1, 7, 4, 1, "Добавить прямоугольник",
+                6, gw, 0, 7, 4, 1, "Добавит\nпрямоугольник",
                 true, true);
         addPoint.setOnClick(() -> {
             // если числа введены верно
@@ -170,8 +170,16 @@ public class PanelControl extends GridPanel {
                         new Vector2d(xField.doubleValue(), yField.doubleValue())
                 );
         });
-        buttons.add(addRectangle);
 
+        buttons.add(addRectangle);
+        Button addRandomRectangle = new Button(
+                window, false, backgroundColor, 0,
+                6, gw, 3, 7, 4, 1, "Добавит cлучайный\nпрямоугольник",
+                true, true);
+        buttons.add(addRandomRectangle);
+        addRandomRectangle.setOnClick(() -> {
+                PanelRendering.task.addRandomRectangle(                );
+        });
         /*buttons.add(addToFirstSet);
 
         Button addToSecondSet = new Button(

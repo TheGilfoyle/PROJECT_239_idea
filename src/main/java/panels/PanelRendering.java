@@ -1,5 +1,6 @@
 package panels;
 
+import app.MyRect;
 import app.Point;
 import app.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -105,7 +106,8 @@ public class PanelRendering extends GridPanel {
         );
         fpsStats = new Stats();
 // создаём задачу без точек
-        task = new Task(cs, new ArrayList<>());
+        task = new Task(cs, new ArrayList<>(),
+                new MyRect(new Point(new Vector2d(-1, -1)), new Point(new Vector2d(0, 0))));
         // добавляем в нё 10 случайных
         task.addRandomPoints(10);
 

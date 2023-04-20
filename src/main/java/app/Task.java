@@ -31,6 +31,7 @@ public class Task {
      * коэффициент колёсика мыши
      */
     private static final float WHEEL_SENSITIVE = 0.001f;
+
     /**
      * Добавить случайные точки
      *
@@ -59,6 +60,7 @@ public class Task {
                 addPoint(pos);
         }
     }
+
     /**
      * Получить положение курсора мыши в СК задачи
      *
@@ -71,6 +73,7 @@ public class Task {
     public Vector2d getRealPos(int x, int y, CoordinateSystem2i windowCS) {
         return ownCS.getCoords(x, y, windowCS);
     }
+
     /**
      * Рисование курсора мыши
      *
@@ -105,6 +108,7 @@ public class Task {
         points.clear();
         solved = false;
     }
+
     /**
      * Решить задачу
      */
@@ -121,7 +125,7 @@ public class Task {
                 Point b = points.get(j);
                 // если точки совпадают по положению
                 if (a.pos.equals(b.pos)) {
-                    if (!crossed.contains(a)){
+                    if (!crossed.contains(a)) {
                         crossed.add(a);
                         crossed.add(b);
                     }
@@ -137,6 +141,7 @@ public class Task {
         // задача решена
         solved = true;
     }
+
     /**
      * Масштабирование области просмотра задачи
      *
@@ -150,6 +155,7 @@ public class Task {
         // выполняем масштабирование
         ownCS.scale(1 + delta * WHEEL_SENSITIVE, realCenter);
     }
+
     /**
      * Отмена решения задачи
      */
@@ -165,6 +171,7 @@ public class Task {
     public boolean isSolved() {
         return solved;
     }
+
     /**
      * Флаг, решена ли задача
      */
@@ -177,10 +184,11 @@ public class Task {
      * Цвет разности
      */
     public static final int SUBTRACTED_COLOR = Misc.getColor(200, 255, 255, 0);
+
     /**
      * Добавить точку
      *
-     * @param pos      положение
+     * @param pos положение
      */
     public void addPoint(Vector2d pos) {
         solved = false;
@@ -189,6 +197,17 @@ public class Task {
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " добавлена");
     }
+
+    /**
+     * Добавить случайный прямоугольник
+     */
+    public void addRandomRectangle() {
+        // левая верхняя вершина
+        Vector2d pointA = ownCS.getRandomCoords();
+        Vector2d pointB = ownCS.getRandomCoords();
+        rect = new MyRect(new Point(pointA), new Point(pointB));
+    }
+
     /**
      * Список точек в пересечении
      */
@@ -225,10 +244,11 @@ public class Task {
     @Getter
     private final ArrayList<Point> points;
     /**
-     * Список прямоугольников
+     * Список точек
      */
     @Getter
-    private final MyRect myRect;
+    private MyRect rect;
+
     /**
      * Список прямых
      */
@@ -253,13 +273,14 @@ public class Task {
     @JsonCreator
     public Task(
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
-            @JsonProperty("points") ArrayList<Point> points
+            @JsonProperty("points") ArrayList<Point> points,
+            @JsonProperty("rect") MyRect rect
     ) {
         this.ownCS = ownCS;
         this.points = points;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
-        myRect = new MyRect(new Point(new Vector2d(-1,-1)), new Point(new Vector2d(0,0)));
+        this.rect = rect;
         line = new Line(new Vector2d(-1, 1), new Vector2d(0, 0), this);
     }
 
@@ -271,8 +292,8 @@ public class Task {
      */
     private void renderTask(Canvas canvas, CoordinateSystem2i windowCS) {
         canvas.save();
-        myRect.paint(windowCS,ownCS,canvas);
-        line.renderLine(canvas,windowCS);
+        rect.paint(windowCS, ownCS, canvas);
+        line.renderLine(canvas, windowCS);
         // создаём перо
         try (var paint = new Paint()) {
 
@@ -291,9 +312,11 @@ public class Task {
                 // рисуем точку
                 canvas.drawRect(Rect.makeXYWH(windowPos.x - POINT_SIZE, windowPos.y - POINT_SIZE, POINT_SIZE * 2, POINT_SIZE * 2), paint);
             }
+
         }
         canvas.restore();
     }
+
     /**
      * Рисование
      *
@@ -308,6 +331,7 @@ public class Task {
         // рисуем задачу
         renderTask(canvas, windowCS);
     }
+
     /**
      * Рисование сетки
      *
@@ -346,6 +370,8 @@ public class Task {
         canvas.restore();
     }
 
+    Vector2d prevClickPos = null;
+
     /**
      * Клик мыши по пространству задачи
      *
@@ -357,11 +383,20 @@ public class Task {
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
         // если левая кнопка мыши, добавляем в первое множество
+
         if (mouseButton.equals(MouseButton.PRIMARY)) {
             addPoint(taskPos);
             // если правая, то во второе
+            prevClickPos = null;
         } else if (mouseButton.equals(MouseButton.SECONDARY)) {
-            addPoint(taskPos);
+
+            if (prevClickPos != null) {
+                rect = new MyRect(new Point(taskPos), new Point(prevClickPos));
+                prevClickPos = null;
+            } else {
+                prevClickPos = taskPos;
+            }
         }
+
     }
 }
