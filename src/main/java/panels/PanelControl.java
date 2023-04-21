@@ -1,5 +1,6 @@
 package panels;
 
+import app.MyRect;
 import app.Point;
 import app.Task;
 import java.util.ArrayList;
@@ -150,36 +151,34 @@ public class PanelControl extends GridPanel {
             } else if (!yField.hasValidDoubleValue())
                 PanelLog.warning("Y координата введена неверно");
             else
-                PanelRendering.task.addPoint(
-                        new Vector2d(xField.doubleValue(), yField.doubleValue())
-                );
+                PanelRendering.task.addPoint(new Vector2d(xField.doubleValue(), yField.doubleValue()));
         });
         buttons.add(addPoint);
         Button addRectangle = new Button(
                 window, false, backgroundColor, 0,
                 6, gw, 0, 7, 4, 1, "Добавит\nпрямоугольник",
                 true, true);
-        addPoint.setOnClick(() -> {
+        addRectangle.setOnClick(() -> {
             // если числа введены верно
-            if (!xField.hasValidDoubleValue()) {
-                PanelLog.warning("X координата введена неверно");
-            } else if (!yField.hasValidDoubleValue())
-                PanelLog.warning("Y координата введена неверно");
+            if (!xField.hasValidDoubleValue())
+                PanelLog.warning("X координата первой точки введена неверно");
+            else if (!yField.hasValidDoubleValue())
+                PanelLog.warning("Y координата первой точки введена неверно");
+            else if (!x1Field.hasValidDoubleValue())
+                PanelLog.warning("X координата второй точки введена неверно");
+            else if (!y1Field.hasValidDoubleValue())
+                PanelLog.warning("Y координата второй точки введена неверно");
             else
-                PanelRendering.task.addPoint(
-                        new Vector2d(xField.doubleValue(), yField.doubleValue())
-                );
+                PanelRendering.task.addRectangle(xField.doubleValue(),yField.doubleValue(),x1Field.doubleValue(),y1Field.doubleValue());
         });
 
         buttons.add(addRectangle);
         Button addRandomRectangle = new Button(
                 window, false, backgroundColor, 0,
-                6, gw, 3, 7, 4, 1, "Добавит cлучайный\nпрямоугольник",
+                6, gw, 3, 7, 4, 1, "Добавить cлучайный\nпрямоугольник",
                 true, true);
         buttons.add(addRandomRectangle);
-        addRandomRectangle.setOnClick(() -> {
-                PanelRendering.task.addRandomRectangle(                );
-        });
+        addRandomRectangle.setOnClick(() -> PanelRendering.task.addRandomRectangle());
         /*buttons.add(addToFirstSet);
 
         Button addToSecondSet = new Button(
