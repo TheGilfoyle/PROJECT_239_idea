@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import misc.Misc;
 import misc.Vector2d;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,6 @@ public class Point {
      * Координаты точки
      */
     public final Vector2d pos;
-
     /**
      * Конструктор точки
      *
