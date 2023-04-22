@@ -22,8 +22,6 @@ public class Line {
     }
 
 
-
-
     void renderLine(Canvas canvas, CoordinateSystem2i windowCS) {
         // опорные точки линии
         Vector2i pointA = windowCS.getCoords(a, task.getOwnCS());

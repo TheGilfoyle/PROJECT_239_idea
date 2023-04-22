@@ -6,11 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.humbleui.jwm.MouseButton;
 import io.github.humbleui.skija.*;
+import io.github.humbleui.skija.Canvas;
+import io.github.humbleui.skija.Font;
+import io.github.humbleui.skija.Paint;
 import lombok.Getter;
 import misc.*;
 import panels.PanelLog;
 import panels.PanelRendering;
 
+import io.github.humbleui.skija.Canvas;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,6 +38,7 @@ public class Task {
      * коэффициент колёсика мыши
      */
     private static final float WHEEL_SENSITIVE = -0.001f;
+    private Graphics canvas;
 
     /**
      * Добавить случайные точки
@@ -118,7 +124,7 @@ public class Task {
 //        Point d = new Point(new Vector2d(1, -1));
 //        System.out.println(line(a, b, c, d));
 //    }
-    //Уравнение прямой и определение пересечения отрезков
+    //Уравнение прямой и определение пересечения отрезка с ней
     public static Point line(Point p3, Point p4, Point p1, Point p2)
     {
         double k1 = 0;
@@ -129,7 +135,7 @@ public class Task {
         boolean t2 = true;
         double x = 0;
         double y = 0;
-        if(p1.pos.x!=p2.pos.x)
+        if(p1.pos.x!=p2.pos.x) // отрезок
         {
             k1 = (p1.pos.y - p2.pos.y) / (p1.pos.x - p2.pos.x);
             b1 = -(k1*p1.pos.x)+p1.pos.y;
@@ -142,7 +148,7 @@ public class Task {
             //System.out.println("x = "+k1+"y+"+b1);
             t1 = false;
         }
-        if(p3.pos.x!=p4.pos.x)
+        if(p3.pos.x!=p4.pos.x) // прямая
         {
             k2 = (p3.pos.y - p4.pos.y) / (p3.pos.x - p4.pos.x);
             b2 = -(k2*p3.pos.x)+p3.pos.y;
@@ -155,41 +161,46 @@ public class Task {
             //System.out.println("x = "+k2+"y+"+b2);
             t2 = false;
         }
-        if(k1 == k2 && t1 == t2)
-            return new Point(new Vector2d(239, 239));
-        else if(t1 == t2)
+        if(k1 == k2 && t1 == t2) // прямые параллельны
+            return null;
+        else if(t1 == t2) // обе прямые имеют вид y = kx+b
         {
             x = (b2-b1)/(k1-k2);
             y = x*k1+b1;
+            //System.out.println("x = " + x + ", первый конец отрезка: " +Math.min(p3.pos.x, p4.pos.x) + ", второй конец отрезка: " + Math.max(p3.pos.x, p4.pos.x));
             if(x > Math.min(p1.pos.x, p2.pos.x) && x < Math.max(p1.pos.x, p2.pos.x))
                 return new Point(new Vector2d(x, y));
             else
-                return new Point(new Vector2d(239, 239));
+                return null;
         }
-        else
+        else // одна из прямых параллельна y
         {
-            if(!t1)
+            if(!t1) // отрезок
             {
                 x = p1.pos.x;
                 y = x*k2+b2;
-                if(x > Math.min(p1.pos.y, p2.pos.y) && x < Math.max(p1.pos.y, p2.pos.y))
+                if(y > Math.min(p1.pos.y, p2.pos.y) && y < Math.max(p1.pos.y, p2.pos.y))
                     return new Point(new Vector2d(x, y));
                 else
-                    return new Point(new Vector2d(239, 239));
+                    return null;
             }
-            else
+            else // прямая
             {
-                x = p2.pos.x;
+                x = p3.pos.x;
                 y = x*k1+b1;
-                if(x > Math.min(p1.pos.y, p2.pos.y) && x < Math.max(p1.pos.y, p2.pos.y))
+                if(x > Math.min(p1.pos.x, p2.pos.x) && x < Math.max(p1.pos.x, p2.pos.x))
                     return new Point(new Vector2d(x, y));
                 else
-                    return new Point(new Vector2d(239, 239));
+                    return null;
             }
         }
 
     }
 
+    static double length(Point a, Point b)
+    {
+        return Math.sqrt(Math.pow((a.pos.x-b.pos.x), 2)+Math.pow((a.pos.y-b.pos.y), 2));
+    }
     /**
      * Решить задачу
      */
@@ -222,27 +233,36 @@ public class Task {
             p4 = temp;
         }
         int m = points.size();
+        Point[] max = new Point[2];
+        double length = 0;
         for (int i = 0; i < m-1; i++) {
             for (int j = i + 1; j < m; j++) {
                 // сохраняем точки
                 Point a = points.get(i);
                 Point b = points.get(j);
+                Point c, d;
                 if(! (line(a, b, p1, p3) == (null)) && (line(a, b, p2, p4) == (null)))
                 {
                     Point n = new Point(Objects.requireNonNull(line(a, b, p1, p3)).getPos());
                     if(n.pos.x > middle.pos.x)
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
                     }
-                    else if(n.pos.x < middle.pos.x)
+                    else
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+                    }
+                    if(length(c,d) > length)
+                    {
+                        max[0] = c;
+                        max[1] = d;
+                        length = length(c,d);
                     }
                 }
                 else if ((line(a, b, p1, p3) == (null)) && !(line(a, b, p2, p4) == (null)))
@@ -250,46 +270,58 @@ public class Task {
                     Point n = new Point(Objects.requireNonNull(line(a, b, p2, p4)).getPos());
                     if(n.pos.x > middle.pos.x)
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
                     }
-                    else if(n.pos.x < middle.pos.x)
+                    else
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+                    }
+                    if(length(c,d) > length)
+                    {
+                        max[0] = c;
+                        max[1] = d;
+                        length = length(c,d);
                     }
                 }
                 else if(!(line(a, b, p1, p3) == (null)) && ! (line(a, b, p2, p4) == (null)))
                 {
                     if((line(a, b, p1, p2) == null))
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p2).pos.x, line(a, b, p3, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p4).pos.x, line(a, b, p1, p4).pos.y));
                     }
                     else
                     {
-                        Point c = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
-                        Point d = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
-                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+                        c = new Point(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+                        d = new Point(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p3, p4).pos.x, line(a, b, p3, p4).pos.y));
+//                        PanelRendering.task.addPoint(new Vector2d(line(a, b, p1, p2).pos.x, line(a, b, p1, p2).pos.y));
                     }
-                }
-                // если точки совпадают по положению
-                if (a.pos.equals(b.pos)) {
-                    if (!crossed.contains(a)) {
-                        crossed.add(a);
-                        crossed.add(b);
+                    if(length(c,d) > length)
+                    {
+                        max[0] = c;
+                        max[1] = d;
+                        length = length(c,d);
                     }
                 }
             }
         }
-
+        try (var p = new Paint()) {
+            PanelRendering.task.addPoint(max[0].getPos());
+            PanelRendering.task.addPoint(max[1].getPos());
+            line = new Line(new Vector2d(max[0].pos.x, max[0].pos.y), new Vector2d(max[1].pos.x, max[1].pos.y), this);
+        }
+        System.out.println(max[0]+ " "+ max[1]);
+        crossed.add(max[0]);
+        crossed.add(max[1]);
         /// добавляем вс
         for (Point point : points)
             if (!crossed.contains(point))
@@ -416,7 +448,7 @@ public class Task {
      * Список прямых
      */
     @Getter
-    private final Line line;
+    private Line line;
     /**
      * Размер точки
      */
