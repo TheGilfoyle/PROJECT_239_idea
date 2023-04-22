@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="A little bit is not enough to solve">
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="A little bit is not enough to solve without section">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/MyRect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/MyRect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/misc/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/Vector2d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/conf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/conf2.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/conf2.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

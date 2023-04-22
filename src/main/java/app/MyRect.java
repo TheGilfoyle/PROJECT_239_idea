@@ -44,7 +44,6 @@ public class MyRect {
             // правая нижняя
             Vector2i pointC = windowCS.getCoords(c.pos,taskCS);
 
-
             // рисуем его стороны
             canvas.drawLine(pointA.x, pointA.y, pointC.x, pointC.y, p);
         }

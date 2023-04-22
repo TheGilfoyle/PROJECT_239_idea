@@ -205,7 +205,7 @@ public class Task {
      * Решить задачу
      */
     public static double length;
-    public Point[] max = new Point[2];
+    public static Point[] max = new Point[2];
     public void solve() {
         // очищаем списки
         crossed.clear();
@@ -469,15 +469,18 @@ public class Task {
      */
     private void renderTask(Canvas canvas, CoordinateSystem2i windowCS) {
         canvas.save();
-        rect.paint(windowCS, ownCS, canvas);
-        if(isSolved())
-        {
-            line.renderLine(canvas, windowCS);
-           // rect.section(new CoordinateSystem2i(new Vector2i()), ownCS, canvas);
-        }
+
         // создаём перо
         try (var paint = new Paint()) {
-
+            paint.setColor(SUBTRACTED_COLOR);
+            rect.paint(windowCS, ownCS, canvas);
+            if(isSolved())
+            {
+                Vector2i a = windowCS.getCoords(max[0].pos.x, max[0].pos.y, ownCS);
+                Vector2i b = windowCS.getCoords(max[1].pos.x, max[1].pos.y, ownCS);
+                canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+                line.renderLine(canvas, windowCS);
+            }
             for (Point p : points) {
                 if (!solved) {
                     paint.setColor(p.getColor());
