@@ -36,7 +36,19 @@ public class MyRect {
             canvas.drawLine(pointD.x, pointD.y, pointA.x, pointA.y, p);
         }
     }
+    void section(CoordinateSystem2i windowCS, CoordinateSystem2d taskCS, Canvas canvas){
+        // создаём перо
+        try (var p = new Paint()) {
+            // левая верхняя вершина
+            Vector2i pointA = windowCS.getCoords(a.pos,taskCS);
+            // правая нижняя
+            Vector2i pointC = windowCS.getCoords(c.pos,taskCS);
 
+
+            // рисуем его стороны
+            canvas.drawLine(pointA.x, pointA.y, pointC.x, pointC.y, p);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

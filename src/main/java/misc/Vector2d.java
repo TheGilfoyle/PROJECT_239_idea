@@ -30,7 +30,7 @@ public class Vector2d {
     /**
      * Конструктор вектора создаёт нулевой вектор
      */
-    public Vector2d() {
+    public Vector2d(Vector2d pos) {
         this.x = 0;
         this.y = 0;
     }

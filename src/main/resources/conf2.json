@@ -1,1 +1,1 @@
-{"@class":"app.Task","ownCS":{"min":{"x":-10.0,"y":-10.0},"max":{"x":10.0,"y":10.0}},"points":[{"pos":{"x":-1.0,"y":1.0},"setType":"FIRST_SET"},{"pos":{"x":1.0,"y":1.0},"setType":"FIRST_SET"},{"pos":{"x":-1.0,"y":1.0},"setType":"SECOND_SET"},{"pos":{"x":-1.0,"y":2.0},"setType":"SECOND_SET"}],"solved":true}
+{"@class":"app.Task","ownCS":{"min":{"x":-9.747973862269847,"y":-10.142897378097121},"max":{"x":11.8240910597014,"y":11.429167543874083}},"points":[],"rect"

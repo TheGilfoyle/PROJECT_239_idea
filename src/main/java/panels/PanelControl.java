@@ -3,6 +3,8 @@ package panels;
 import app.MyRect;
 import app.Point;
 import app.Task;
+
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 import controls.*;
@@ -233,7 +235,8 @@ public class PanelControl extends GridPanel {
                 PanelRendering.task.solve();
                 String s = "Задача решена\n" +
                         "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
-                        "Отдельных точек: " + PanelRendering.task.getSingle().size();
+                        "Отдельных точек: " + PanelRendering.task.getSingle().size()+ "\n" +
+                        "Размер полученного отрезка: " + Task.length;
 
                 PanelInfo.show(s + "\n\nНажмите Esc, чтобы вернуться");
                 PanelLog.success(s);
