@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="Солвэ">
+    <list default="true" id="cd9176ba-5958-442f-94f1-e897a3729ea2" name="Changes" comment="Update Solve">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,23 +23,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="KEEP" />
-    <option name="UPDATE_TYPE" value="REBASE" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$MAVEN_REPOSITORY$/io/github/humbleui/jwm/0.4.0/jwm-0.4.0-sources.jar!/io/github/humbleui/jwm/App.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$MAVEN_REPOSITORY$/io/github/humbleui/jwm/0.4.0/jwm-0.4.0-sources.jar!/io/github/humbleui/jwm/Window.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$MAVEN_REPOSITORY$/io/github/humbleui/jwm/0.4.0/jwm-0.4.0-sources.jar!/io/github/humbleui/jwm/WindowWin32.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$MAVEN_REPOSITORY$/io/github/humbleui/jwm/0.4.0/jwm-0.4.0.jar!/io/github/humbleui/jwm/Window.class" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/app/Application.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/app/Colors.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/controls/MultiLineLabel.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2i.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/misc/Misc.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/panels/Panel.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/panels/PanelControl.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/panels/PanelLog.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -55,15 +39,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\andre\Documents\GitHub\PROJECT_239_idea\src\main\java\app" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.PROJECT_239">
     <configuration name="PROJECT_239" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="PROJECT_239_idea" />
+      <module name="test" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,12 +87,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.PROJECT_239" />
-      <item itemvalue="JUnit.UnitTest" />
-      <item itemvalue="JUnit.UnitTest.firstTest" />
-      <item itemvalue="JUnit.UnitTest.secondTest" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.PROJECT_239" />
@@ -455,35 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682105519199</updated>
     </task>
-    <task id="LOCAL-00045" summary="On the way to Solve">
-      <created>1682120690437</created>
+    <task id="LOCAL-00045" summary="Buttons">
+      <created>1682106935524</created>
       <option name="number" value="00045" />
       <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1682120690437</updated>
+      <updated>1682106935524</updated>
     </task>
-    <task id="LOCAL-00046" summary="Still on the way to Solve">
-      <created>1682124855721</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1682124855721</updated>
-    </task>
-    <task id="LOCAL-00047" summary="A little bit is not enough to solve">
-      <created>1682185484218</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1682185484218</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Солвэ">
-      <created>1682200435854</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1682200435854</updated>
-    </task>
-    <option name="localTasksCounter" value="49" />
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,15 +449,12 @@
             <State />
           </value>
         </entry>
-        <entry key="c3c2b00d-4be4-4439-b59c-2bd7393289e0">
-          <value>
-            <State />
-          </value>
-        </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="float cs" />
+    <MESSAGE value="adding points works" />
     <MESSAGE value="log works" />
     <MESSAGE value="inputs work" />
     <MESSAGE value="input select works" />
@@ -527,13 +476,8 @@
     <MESSAGE value="Render" />
     <MESSAGE value="Almost Buttons" />
     <MESSAGE value="On the way to Buttons" />
-    <MESSAGE value="On the way to Solve" />
-    <MESSAGE value="Still on the way to Solve" />
-    <MESSAGE value="A little bit is not enough to solve" />
-    <MESSAGE value="Солвэ" />
-    <option name="LAST_COMMIT_MESSAGE" value="Солвэ" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PROJECT_239_idea$PROJECT_239.ic" NAME="PROJECT_239 Coverage Results" MODIFIED="1682123387569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <MESSAGE value="Buttons" />
+    <MESSAGE value="Update Solve" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Solve" />
   </component>
 </project>
