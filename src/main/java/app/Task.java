@@ -205,7 +205,7 @@ public class Task {
      * Решить задачу
      */
     public static double length;
-    public static Point[] max = new Point[2];
+    public static Point[] max = new Point[4];
     public void solve() {
         // очищаем списки
         crossed.clear();
@@ -256,6 +256,8 @@ public class Task {
                     if (distance(c, d) > length) {
                         max[0] = c;
                         max[1] = d;
+                        max[2] = a;
+                        max[3] = b;
                         length = distance(c, d);
                     }
                 } else if ((line(a, b, p1, p3) == (null)) && !(line(a, b, p2, p4) == (null))) {
@@ -274,6 +276,8 @@ public class Task {
                     if (distance(c, d) > length) {
                         max[0] = c;
                         max[1] = d;
+                        max[2] = a;
+                        max[3] = b;
                         length = distance(c, d);
                     }
                 } else if (!(line(a, b, p1, p3) == (null)) && !(line(a, b, p2, p4) == (null))) {
@@ -291,6 +295,8 @@ public class Task {
                     if (distance(c, d) > length) {
                         max[0] = c;
                         max[1] = d;
+                        max[2] = a;
+                        max[3] = b;
                         length = distance(c, d);
                     }
                 }
@@ -299,14 +305,19 @@ public class Task {
         length = ((double)Math.round(length*100))/100;
         PanelRendering.task.addPoint(max[0].getPos());
         PanelRendering.task.addPoint(max[1].getPos());
+        PanelRendering.task.addPoint(max[3].getPos());
+        PanelRendering.task.addPoint(max[2].getPos());
         line = new Line(new Vector2d(max[0].pos.x, max[0].pos.y), new Vector2d(max[1].pos.x, max[1].pos.y), this);
         PanelLog.info("Размер отрезка: "+ length);
         System.out.println(max[0] + " " + max[1]);
-        crossed.add(max[0]);
-        crossed.add(max[1]);
+        lines.add(max[0]);
+        lines.add(max[1]);
+        crossed.add(max[2]);
+        crossed.add(max[3]);
+        System.out.println(crossed);
         /// добавляем вс
         for (Point point : points)
-            if (!crossed.contains(point))
+            if (!crossed.contains(point) || !lines.contains(point))
                 single.add(point);
 
         // задача решена
@@ -351,6 +362,7 @@ public class Task {
      * Цвет пересечения
      */
     public static final int CROSSED_COLOR = Misc.getColor(200, 0, 255, 255);
+    public static final int Point_color = Misc.getColor(200, 1, 160, 73);
     /**
      * Цвет разности
      */
@@ -391,6 +403,13 @@ public class Task {
     @Getter
     @JsonIgnore
     private final ArrayList<Point> crossed;
+
+    /**
+     * Список точек на линии
+     */
+    @Getter
+    @JsonIgnore
+    private final ArrayList<Point> lines;
     /**
      * Список точек в разности
      */
@@ -457,6 +476,7 @@ public class Task {
         this.points = points;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
+        this.lines = new ArrayList<>();
         this.rect = rect;
         line = new Line(new Vector2d(-1, 1), new Vector2d(0, 0), this);
     }
@@ -487,6 +507,8 @@ public class Task {
                 } else {
                     if (crossed.contains(p))
                         paint.setColor(CROSSED_COLOR);
+                    else if(lines.contains(p))
+                        paint.setColor(Point_color);
                     else
                         paint.setColor(SUBTRACTED_COLOR);
                 }
