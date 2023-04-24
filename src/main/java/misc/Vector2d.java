@@ -1,6 +1,9 @@
 package misc;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -22,7 +25,8 @@ public class Vector2d {
      * @param x координата X вектора
      * @param y координата Y вектора
      */
-    public Vector2d(double x, double y) {
+    @JsonCreator
+    public Vector2d(@JsonProperty("x") double x, @JsonProperty("y") double y) {
         this.x = x;
         this.y = y;
     }

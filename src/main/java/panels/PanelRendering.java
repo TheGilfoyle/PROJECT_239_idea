@@ -1,5 +1,6 @@
 package panels;
 
+import app.Line;
 import app.MyRect;
 import app.Point;
 import app.Task;
@@ -67,9 +68,12 @@ public class PanelRendering extends GridPanel {
         try {
             // считываем систему координат
             task = objectMapper.readValue(new File(path), Task.class);
+            if(task.hidden)
+                task.solve();
             PanelLog.success("Файл " + path + " успешно загружен");
         } catch (IOException e) {
             PanelLog.error("Не получилось прочитать файл " + path + "\n" + e);
+            System.out.println(e);
         }
     }
     /**
@@ -106,8 +110,7 @@ public class PanelRendering extends GridPanel {
         );
         fpsStats = new Stats();
 // создаём задачу без точек
-        task = new Task(cs, new ArrayList<>(),
-                new MyRect(new Point(new Vector2d(-1, -1)), new Point(new Vector2d(0, 0))));
+        task = new Task(cs, new ArrayList<>(), new MyRect(new Point(new Vector2d(-1, -1)), new Point(new Vector2d(0, 0))), false, new Line(1));
         // добавляем в нё 10 случайных
         task.addRandomPoints(10);
 

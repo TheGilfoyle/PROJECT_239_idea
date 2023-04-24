@@ -47,7 +47,8 @@ public class PanelControl extends GridPanel {
     /**
      * Сброс решения задачи
      */
-    private void cancelTask() {
+    private void cancelTask()
+    {
         PanelRendering.task.cancel();
         // Задаём новый текст кнопке решения
         solve.text = "Решить";
@@ -55,7 +56,7 @@ public class PanelControl extends GridPanel {
     /**
      * Кнопка "решить"
      */
-    private final Button solve;
+    public static Button solve;
 
     /**
      * Панель управления
@@ -147,6 +148,7 @@ public class PanelControl extends GridPanel {
                 6, gw, 1, 4, 4, 1, "Добавить точку",
                 true, true);
         addPoint.setOnClick(() -> {
+            Task.solved = false;
             // если числа введены верно
             if (!xField.hasValidDoubleValue()) {
                 PanelLog.warning("X координата введена неверно");
@@ -158,7 +160,7 @@ public class PanelControl extends GridPanel {
         buttons.add(addPoint);
         Button addRectangle = new Button(
                 window, false, backgroundColor, 0,
-                6, gw, 0, 7, 4, 1, "Добавит\nпрямоугольник",
+                6, gw, 0, 7, 4, 1, "Добавить\nпрямоугольник",
                 true, true);
         addRectangle.setOnClick(() -> {
             // если числа введены верно
@@ -234,14 +236,14 @@ public class PanelControl extends GridPanel {
             if (!PanelRendering.task.isSolved()) {
                 PanelRendering.task.solve();
                 String s = "Задача решена\n" +
-                        "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
-                        "Отдельных точек: " + PanelRendering.task.getSingle().size()+ "\n" +
+                        "Всего точек: " + (PanelRendering.task.getSingle().size() > 4 ? PanelRendering.task.getSingle().size() - 4: PanelRendering.task.getSingle().size()) + "\n" +
                         "Размер полученного отрезка: " + Task.length;
 
                 PanelInfo.show(s + "\n\nНажмите Esc, чтобы вернуться");
                 PanelLog.success(s);
                 solve.text = "Сбросить";
-            } else {
+            }
+            else {
                 cancelTask();
             }
             window.requestFrame();

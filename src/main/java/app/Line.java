@@ -1,5 +1,7 @@
 package app;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.RRect;
@@ -8,19 +10,26 @@ import misc.CoordinateSystem2i;
 import misc.Misc;
 import misc.Vector2d;
 import misc.Vector2i;
+/**
+ * Класс прямой
+ **/
 
 public class Line {
+    //Первая точка
     public Vector2d a;
+    //Вторая точка
     public Vector2d b;
-
+    //Текущая задача
     Task task;
-
-    public Line(Vector2d a, Vector2d b, Task task) {
+    @JsonCreator
+    public Line(@JsonProperty("a") Vector2d a, @JsonProperty("b") Vector2d b, @JsonProperty("task") Task task) {
         this.a = a;
         this.b = b;
         this.task = task;
     }
 
+    public Line(int a)
+    {}
 
     void renderLine(Canvas canvas, CoordinateSystem2i windowCS) {
         // опорные точки линии

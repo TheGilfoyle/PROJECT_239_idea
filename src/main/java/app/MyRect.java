@@ -1,18 +1,27 @@
 package app;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;
 import misc.CoordinateSystem2d;
 import misc.CoordinateSystem2i;
+import misc.Vector2d;
 import misc.Vector2i;
 
 import java.util.Objects;
 
-public class MyRect {
-    Point a;
-    Point c;
+/**
+ * Класс прямоугольника
+ **/
 
-    public MyRect(Point a, Point c) {
+public class MyRect {
+    //Первая точка
+    Point a;
+    //Вторая точка
+    Point c;
+    @JsonCreator
+    public MyRect(@JsonProperty("a") Point a, @JsonProperty("c") Point c) {
         this.a = a;
         this.c = c;
     }
@@ -47,6 +56,22 @@ public class MyRect {
             // рисуем его стороны
             canvas.drawLine(pointA.x, pointA.y, pointC.x, pointC.y, p);
         }
+    }
+
+    public Point getA() {
+        return a;
+    }
+
+    public void setA(Point a) {
+        this.a = a;
+    }
+
+    public Point getC() {
+        return c;
+    }
+
+    public void setC(Point c) {
+        this.c = c;
     }
 
     @Override

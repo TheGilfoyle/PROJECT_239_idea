@@ -1,3 +1,4 @@
+//import app.MyRect;
 //import app.Point;
 //import app.Task;
 //import misc.CoordinateSystem2d;
@@ -21,7 +22,7 @@
 //     * @param singleCoords  мн-во разности
 //     */
 //    private static void test(ArrayList<Point> points, Set<Vector2d> crossedCoords, Set<Vector2d> singleCoords) {
-//        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20), points,rects);
+//        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20), points, new MyRect());
 //        task.solve();
 //        // проверяем, что координат пересечения в два раза меньше, чем точек
 //        assert crossedCoords.size() == task.getCrossed().size() / 2;

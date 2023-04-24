@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static app.Colors.TASK_GRID_COLOR;
+import static panels.PanelControl.solve;
 
 
 /**
@@ -91,6 +92,8 @@ public class Task {
      * @param pos      положение курсора мыши
      */
     public void paintMouse(Canvas canvas, CoordinateSystem2i windowCS, Font font, Vector2i pos) {
+        if(!solved)
+            solve.text = "Решить";
         // создаём перо
         try (var paint = new Paint().setColor(TASK_GRID_COLOR)) {
             // сохраняем область рисования
@@ -202,7 +205,7 @@ public class Task {
         return Math.sqrt(Math.pow((a.pos.x-b.pos.x), 2)+Math.pow((a.pos.y-b.pos.y), 2));
     }
     /**
-     * Решить задачу
+     *  задачу
      */
     public static double length;
     public static Point[] max = new Point[4];
@@ -242,6 +245,7 @@ public class Task {
                     Point a = points.get(i);
                     Point b = points.get(j);
                     Point c, d;
+                    //if(!Objects.equals(line(a, b, p1, p3), p1) && Objects.equals(line(a, b, p1, p3), p3) && Objects.equals(line(a, b, p2, p4), p2) && Objects.equals(line(a, b, p2, p4), p4))
                     if (!(line(a, b, p1, p3) == (null)) && (line(a, b, p2, p4) == (null))) {
                         Point n = new Point(Objects.requireNonNull(line(a, b, p1, p3)).getPos());
                         if (n.pos.x > middle.pos.x) {
@@ -304,27 +308,30 @@ public class Task {
                     }
                 }
             }
-    }
-        length = ((double)Math.round(length*100))/100;
-        PanelRendering.task.addPoint(max[0].getPos());
-        PanelRendering.task.addPoint(max[1].getPos());
-        PanelRendering.task.addPoint(max[3].getPos());
-        PanelRendering.task.addPoint(max[2].getPos());
-        line = new Line(new Vector2d(max[0].pos.x, max[0].pos.y), new Vector2d(max[1].pos.x, max[1].pos.y), this);
-        PanelLog.info("Размер отрезка: "+ length);
-        System.out.println(max[0] + " " + max[1]);
-        lines.add(max[0]);
-        lines.add(max[1]);
-        crossed.add(max[2]);
-        crossed.add(max[3]);
-        System.out.println(crossed);
-        /// добавляем вс
-        for (Point point : points)
-            if (!crossed.contains(point) || !lines.contains(point))
-                single.add(point);
+        }
+        if(max[0] != null) {
+            length = ((double) Math.round(length * 100)) / 100;
+            PanelRendering.task.addPoint(max[0].getPos());
+            PanelRendering.task.addPoint(max[1].getPos());
+            PanelRendering.task.addPoint(max[3].getPos());
+            PanelRendering.task.addPoint(max[2].getPos());
+            line = new Line(new Vector2d(max[0].pos.x, max[0].pos.y), new Vector2d(max[1].pos.x, max[1].pos.y), this);
+            PanelLog.info("Размер отрезка: " + length);
+            System.out.println(max[0] + " " + max[1]);
+            lines.add(max[0]);
+            lines.add(max[1]);
+            crossed.add(max[2]);
+            crossed.add(max[3]);
+            System.out.println(crossed);
+        }
+            /// добавляем вс
+            for (Point point : points)
+                if (!crossed.contains(point) || !lines.contains(point))
+                    single.add(point);
+            if(max[0] != null)
+            // задача решена
+                solved = true;
 
-        // задача решена
-        solved = true;
     }
 
     /**
@@ -345,6 +352,7 @@ public class Task {
      * Отмена решения задачи
      */
     public void cancel() {
+        points.removeIf(lines::contains);
         solved = false;
         length = 0;
     }
@@ -361,7 +369,7 @@ public class Task {
     /**
      * Флаг, решена ли задача
      */
-    private boolean solved;
+    public static boolean solved;
     /**
      * Цвет пересечения
      */
@@ -391,6 +399,7 @@ public class Task {
      */
     public void addRandomRectangle() {
         // левая верхняя вершина
+        solved = false;
         Vector2d pointA = ownCS.getRandomCoords();
         Vector2d pointB = ownCS.getRandomCoords();
         rect = new MyRect(new Point(pointA), new Point(pointB));
@@ -414,7 +423,7 @@ public class Task {
      */
     @Getter
     @JsonIgnore
-    private final ArrayList<Point> lines;
+    public static ArrayList<Point> lines;
     /**
      * Список точек в разности
      */
@@ -465,6 +474,28 @@ public class Task {
      */
     protected CoordinateSystem2i lastWindowCS;
 
+//    /**
+//     * Задача
+//     *
+//     * @param ownCS  СК задачи
+//     * @param points массив точек
+//     */
+//    @JsonCreator
+//    public Task(
+//            @JsonProperty("ownCS") CoordinateSystem2d ownCS,
+//            @JsonProperty("points") ArrayList<Point> points,
+//            @JsonProperty("rect") MyRect rect, @JsonProperty("solved") boolean solved) {
+//        this.ownCS = ownCS;
+//        this.points = points;
+//        this.crossed = new ArrayList<>();
+//        this.single = new ArrayList<>();
+//        this.rect = rect;
+//        this.lines = new ArrayList<>();
+//        this.solved = solved;
+//        this.line =  new Line(new Vector2d(-1, 1), new Vector2d(0, 0), this);
+//    }
+
+    public static boolean hidden = false;
     /**
      * Задача
      *
@@ -475,17 +506,18 @@ public class Task {
     public Task(
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
             @JsonProperty("points") ArrayList<Point> points,
-            @JsonProperty("rect") MyRect rect
-    ) {
+            @JsonProperty("rect") MyRect rect, @JsonProperty("solved") boolean solved,
+            @JsonProperty("line") Line line) {
         this.ownCS = ownCS;
         this.points = points;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
-        this.lines = new ArrayList<>();
         this.rect = rect;
-        line = new Line(new Vector2d(-1, 1), new Vector2d(0, 0), this);
+        this.lines = new ArrayList<>();
+        this.solved = false;
+        this.line = line;
+        hidden = solved;
     }
-
     /**
      * Рисование задачи
      *
@@ -499,11 +531,14 @@ public class Task {
         try (var paint = new Paint()) {
             paint.setColor(SUBTRACTED_COLOR);
             rect.paint(windowCS, ownCS, canvas);
-            if(isSolved())
+            if(isSolved() )
             {
-                Vector2i a = windowCS.getCoords(max[0].pos.x, max[0].pos.y, ownCS);
-                Vector2i b = windowCS.getCoords(max[1].pos.x, max[1].pos.y, ownCS);
-                canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+                if(max[0] != null)
+                {
+                    Vector2i a = windowCS.getCoords(max[0].pos.x, max[0].pos.y, ownCS);
+                    Vector2i b = windowCS.getCoords(max[1].pos.x, max[1].pos.y, ownCS);
+                    canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+                }
                 line.renderLine(canvas, windowCS);
             }
             for (Point p : points) {
@@ -590,6 +625,8 @@ public class Task {
      * @param mouseButton кнопка мыши
      */
     public void click(Vector2i pos, MouseButton mouseButton) {
+        if(!solved)
+            solve.text = "Решить";
         if (lastWindowCS == null) return;
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
